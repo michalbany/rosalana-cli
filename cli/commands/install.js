@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const print = require('../../utils/console');
+const print = require('../utils/console');
 const { execSync } = require('child_process');
 const { detectMatch, detectExistence } = require('../utils/detection');
 const { resolvePath } = require('../utils/findFile');

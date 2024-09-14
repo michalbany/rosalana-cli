@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
-const print = require("../../utils/console");
+const print = require("../utils/console");
 
 async function initCommand() {
   // Zobrazení názvu
