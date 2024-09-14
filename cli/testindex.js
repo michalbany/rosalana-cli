@@ -12,7 +12,7 @@ const {
   installDependencies,
   installTailwindCSS,
   installTypeScript,
-} = require("../utils/installation");
+} = require("./utils/installation");
 const fs = require("fs");
 const path = require("path");
 

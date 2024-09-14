@@ -17,7 +17,7 @@ async function initCommand() {
       type: "list",
       name: "framework",
       message: "Which framework do you use?",
-      choices: ["Vite", "Nuxt", "Laravel-Inertia"],
+      choices: ["Vite", "Nuxt"],
       default: "Vite",
     },
     {

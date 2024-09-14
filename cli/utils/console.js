@@ -14,7 +14,6 @@ const print = {
     console.log(
       boxen(chalk.hex("#0DD885")(`[OK] ${message}`), {
         padding: { top: 1, right: 5, bottom: 1, left: 1 },
-        margin: { bottom: 1 },
         backgroundColor: "#002817",
         borderStyle: {
           topLeft: " ",
@@ -31,7 +30,6 @@ const print = {
     console.log(
       boxen(chalk.hex("#FF3B10")(`[Error] ${message}`), {
         padding: { top: 1, right: 5, bottom: 1, left: 1 },
-        margin: { bottom: 1 },
         backgroundColor: "#340A01",
         borderStyle: {
           topLeft: " ",
@@ -48,7 +46,6 @@ const print = {
     console.log(
       boxen(chalk.hex("#64C7FF")(`[Info] ${message}`), {
         padding: { top: 1, right: 5, bottom: 1, left: 1 },
-        margin: { bottom: 1 },
         backgroundColor: "#1A202C",
         borderStyle: {
           topLeft: " ",
@@ -65,7 +62,6 @@ const print = {
     console.log(
       boxen(chalk.hex("#FBCA05")(`[Warning] ${message}`), {
         padding: { top: 1, right: 5, bottom: 1, left: 1 },
-        margin: { bottom: 1 },
         backgroundColor: "#292100",
         borderStyle: {
           topLeft: " ",
