@@ -1,0 +1,27 @@
+{
+  "name": "rosalana-dev",
+  "version": "1.0.0",
+  "bin": {
+    "rosalana-dev": "./cli/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "boxen": "^5.0.1",
+    "chalk": "^4.1.2",
+    "commander": "^12.1.0",
+    "figlet": "^1.7.0",
+    "inquirer": "^8.2.6"
+  },
+  "keywords": [
+    "vue",
+    "components",
+    "cli",
+    "rosalana",
+    "developer-tools"
+  ],
+  "author": "Michael Bany",
+  "license": "MIT",
+  "description": "A CLI for managing components."
+}
