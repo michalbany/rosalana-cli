@@ -68,6 +68,11 @@ async function installCommand() {
     }
 
     // Uprava konfigurace v cílovém projektu
+    // - uprava tailwind.config.js
+    // - uprava vite.config.js(ts) / nuxt.config.js(ts)
+    // - uprava tsconfig.json / jsconfig.json
+    // - uprava global css
+    // - import global css to main file
 
     print.success("Installation completed successfully!");
     print.command(
