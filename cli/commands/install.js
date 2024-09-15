@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const inquirer = require("inquirer");
 const print = require("../utils/console");
-const { execSync } = require("child_process");
 const { detectMatch, detectExistence } = require("../utils/detection");
 const { resolvePath, createFiles } = require("../utils/files");
 
@@ -24,6 +23,7 @@ async function installCommand() {
     print.success("Configuration file loaded");
   } catch (error) {
     print.error("Configuration file not found");
+    print.command("rosalana-dev init", "initialize configuration file");
     process.exit(1);
   }
 

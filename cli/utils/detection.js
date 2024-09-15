@@ -80,7 +80,7 @@ async function detectMatch(config) {
       installTailwindCSS();
     } else {
       print.error("Aborting installation...");
-      process.exit(0);
+      process.exit(1);
     }
   }
 
