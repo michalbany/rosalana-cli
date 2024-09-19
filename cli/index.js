@@ -9,7 +9,7 @@ const addCommand = require('./commands/add');
 
 program
     .name('rosalana-dev')
-    .description('CLI tool for manage components')
+    .description('Streamline your workflow with Rosalana composables. A simple CLI for sharing and managing pre-built components.')
     .version('1.0.0');
 
 program
@@ -26,4 +26,5 @@ program
     .command('add <component>')
     .description('Add component')
     .action(addCommand);
+
 program.parse(process.argv);

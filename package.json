@@ -16,6 +16,7 @@
   },
   "keywords": [
     "vue",
+    "nuxt",
     "components",
     "cli",
     "rosalana",
@@ -23,5 +24,5 @@
   ],
   "author": "Michael Bany",
   "license": "MIT",
-  "description": "A CLI for managing components."
+  "description": "Rosalana-dev is a powerful CLI for effortlessly downloading and sharing composables, complete with pre-built components. It streamlines collaboration and reveals key functions used in Rosalana projects, enabling developers to contribute and innovate."
 }
