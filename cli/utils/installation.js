@@ -20,8 +20,14 @@ function installTailwindCSS() {
 }
 
 function installTypeScript() {
-  console.log(chalk.blue("Installing TypeScript..."));
-  execSync("npm install -D typescript", { stdio: "inherit" });
+  print.info("Installing TypeScript...");
+  try {
+    execSync("npm install -D typescript", { stdio: "inherit" });
+    print.success("TypeScript has been successfully installed.");
+  } catch (error) {
+    print.error("An error occurred while installing TypeScript.\n", error);
+    process.exit(1);
+  }
 }
 
 module.exports = {

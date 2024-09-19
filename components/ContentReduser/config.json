@@ -1,0 +1,15 @@
+{
+    "files": [
+      {
+        "name": "useContentReduser.ts",
+        "path": "composables"
+      },
+      {
+        "name": "ContentReduser.d.ts",
+        "path": "types"
+      }
+    ],
+    "type": "composables",
+    "name": "ContentReduser"
+  }
+  

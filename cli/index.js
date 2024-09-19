@@ -5,6 +5,7 @@ const program = new Command();
 // Commands
 const initCommand = require('./commands/init');
 const installCommand = require('./commands/install');
+const addCommand = require('./commands/add');
 
 program
     .name('rosalana-dev')
@@ -21,4 +22,8 @@ program
     .description('Install components')
     .action(installCommand);
 
+program
+    .command('add <component>')
+    .description('Add component')
+    .action(addCommand);
 program.parse(process.argv);

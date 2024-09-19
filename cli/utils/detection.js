@@ -3,7 +3,7 @@ const inquirer = require("inquirer");
 const path = require("path");
 const { resolvePath } = require("./files");
 const print = require("./console");
-const { installTailwindCSS } = require("./installation");
+const { installTailwindCSS, installTypeScript } = require("./installation");
 
 function detectDependencies() {
   const projectPackageJsonPath = path.join(process.cwd(), "package.json");
@@ -18,6 +18,7 @@ function detectDependencies() {
     devDependencies = projectPackageJson.devDependencies || {};
   }
 
+  const vue = dependencies["vue"] || devDependencies["vue"];
   const vite = dependencies["vite"] || devDependencies["vite"];
   const nuxt = dependencies["nuxt"] || devDependencies["nuxt"];
   const tailwindcss =
@@ -25,17 +26,19 @@ function detectDependencies() {
   const typescript =
     dependencies["typescript"] || devDependencies["typescript"];
 
-  const autoprefixer = dependencies["autoprefixer"] || devDependencies["autoprefixer"];
+  const autoprefixer =
+    dependencies["autoprefixer"] || devDependencies["autoprefixer"];
 
   const framework = vite ? "Vite" : nuxt ? "Nuxt" : null;
 
   return {
     vite,
     nuxt,
+    vue,
     tailwindcss,
     typescript,
     framework,
-    autoprefixer
+    autoprefixer,
   };
 }
 
@@ -70,8 +73,7 @@ async function detectMatch(config) {
       {
         type: "confirm",
         name: "installTailwind",
-        message:
-          "Package will be installed. Would you like to continue?",
+        message: "Package will be installed. Would you like to continue?",
         default: true,
       },
     ]);
@@ -90,28 +92,51 @@ async function detectMatch(config) {
 function detectExistence(config) {
   let errors = [];
 
-  const appConfigPath = resolvePath(config.appConfigPath);
-  const tsconfigPath = resolvePath(config.tsconfigPath);
-  const globalCSSPath = resolvePath(config.globalCSS);
-  const componentsDir = resolvePath(config.componentsDir);
+  const path = config.paths;
 
-  if (!fs.existsSync(appConfigPath)) {
-    errors.push(config.appConfigPath);
+  if (!fs.existsSync(resolvePath(path.components))) {
+    errors.push(path.components);
   }
 
-  if (!fs.existsSync(tsconfigPath)) {
-    errors.push(config.tsconfigPath);
+  if (!fs.existsSync(resolvePath(path.composables))) {
+    errors.push(path.composables);
   }
 
-  if (!fs.existsSync(globalCSSPath)) {
-    errors.push(config.globalCSS);
-  }
-
-  if (!fs.existsSync(componentsDir)) {
-    errors.push(config.componentsDir);
+  if (!fs.existsSync(resolvePath(path.types))) {
+    errors.push(path.types);
   }
 
   return errors;
 }
 
-module.exports = { detectDependencies, detectMatch, detectExistence };
+async function detectOrFix() {
+  const dependencies = detectDependencies();
+
+  if (!dependencies.vue) {
+    print.error(
+      "Vue not found in your project!\n\nPlease install Vue before proceeding."
+    );
+  }
+
+  if (!dependencies.typescript) {
+    print.error("TypeScript not found in your project!");
+
+    const installTypescriptAnswer = await inquirer.prompt([
+      {
+        type: "confirm",
+        name: "installTypescript",
+        message: "Package will be installed. Would you like to continue?",
+        default: true,
+      },
+    ]);
+
+    if (installTypescriptAnswer.installTypescript) {
+      installTypeScript();
+    } else {
+      print.error("Aborting installation...");
+      process.exit(1);
+    }
+  }
+}
+
+module.exports = { detectDependencies, detectMatch, detectExistence, detectOrFix };

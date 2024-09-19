@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
 const print = require("../utils/console");
+const { detectDependencies } = require("../utils/detection");
 
 async function initCommand() {
   // Zobrazení názvu
@@ -11,68 +12,38 @@ async function initCommand() {
   // Zobrazení zprávy o inicializaci
   print.info("Initializing configuration file...");
 
+  const dependencies = detectDependencies();
+
   // Dotazy na uživatele
   const answers = await inquirer.prompt([
     {
-      type: "list",
-      name: "framework",
-      message: "Which framework do you use?",
-      choices: ["Vite", "Nuxt"],
-      default: "Vite",
-    },
-    {
-      type: "confirm",
-      name: "typescript",
-      message: "Do you want to use TypeScript? (Recommended)",
-      default: true,
-    },
-    {
       type: "input",
-      name: "componentsDir",
+      name: "components",
       message: "Where do you want to place components?",
-      default: (answers) => {
-        return answers.framework === "Vite"
-          ? "./src/components/Ui"
-          : "./components/Ui";
-      },
-    },
-    {
-      type: "list",
-      name: "baseColor",
-      message: "Which base color would you like to use?",
-      choices: ["slate", "gray", "zinc", "neutral", "stone"],
-      default: "slate",
-    },
-    {
-      type: "input",
-      name: "tsconfigPath",
-      message: (answers) => {
-        return `Where is your ${answers.typescript ? "tsconfig.json" : "jsconfig.json"} file?`;
-      },
-      default: (answers) => {
-        return answers.typescript ? "./tsconfig.json" : "./jsconfig.json";
+      default: (dependencies) => {
+        return dependencies.framework === "Nuxt"
+          ? "./components/Rs"
+          : "./src/components/Rs";
       },
     },
     {
       type: "input",
-      name: "globalCSS",
-      message: "Where is your global CSS file?",
-      default: (answers) => {
-        return answers.framework === "Vite"
-          ? "./src/assets/tailwind.css"
-          : "./assets/css/tailwind.css";
+      name: "composables",
+      message: "Where do you want to place composables?",
+      default: (dependencies) => {
+        return dependencies.framework === "Nuxt"
+          ? "./composables/Rs"
+          : "./src/composables/Rs";
       },
     },
     {
       type: "input",
-      name: "appConfigPath",
-      message: (answers) => {
-        return `Where is your ${answers.framework} config file?`;
-      },
-      default: (answers) => {
-        return answers.framework === "Vite"
-          ? `./vite.config${answers.typescript ? ".ts" : ".js"}`
-          : `./nuxt.config${answers.typescript ? ".ts" : ".js"}`;
+      name: "types",
+      message: "Where do you want to place types?",
+      default: (dependencies) => {
+        return dependencies.framework === "Nuxt"
+          ? "./types/rs"
+          : "./src/types/rs";
       },
     }
   ]);
@@ -81,7 +52,16 @@ async function initCommand() {
   const configPath = path.resolve(process.cwd(), "rosalana.config.json");
 
   try {
-    fs.writeFileSync(configPath, JSON.stringify(answers, null, 2));
+    fs.writeFileSync(configPath, JSON.stringify({
+      "rosalana-dev": "1.0.0",
+      "paths": {
+        ...answers
+      },
+      "installed": {
+        "components": [],
+        "composables": [],
+      }
+    }, null, 2));
   } catch (err) {
     // Zobrazení chyby při zápisu konfigurace
     print.error(`Writing configuration file: \n${err.message}`);

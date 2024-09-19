@@ -1,0 +1,18 @@
+{
+    "files": [
+      {
+        "name": "ControlStateByUrl.d.ts",
+        "path": "types"
+      },
+      {
+        "name": "useControlStateByUrl.ts",
+        "path": "composables"
+      }
+    ],
+    "type": "composables",
+    "name": "ControlStateByUrl",
+    "warnings": [
+        "This component was created for Nuxt.js. It should be customized for other frameworks."
+    ]
+  }
+  

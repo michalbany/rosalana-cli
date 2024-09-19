@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "name": "VisualTable.d.ts",
+      "path": "types"
+    },
+    {
+      "name": "useVisualTable.ts",
+      "path": "composables"
+    }
+  ],
+  "type": "composables",
+  "name": "VisualTable"
+}

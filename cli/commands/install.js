@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const path = require("path");
-const inquirer = require("inquirer");
 const print = require("../utils/console");
-const { detectMatch, detectExistence } = require("../utils/detection");
-const { resolvePath, createFiles } = require("../utils/files");
+const {
+  detectMatch,
+  detectExistence,
+  detectOrFix,
+} = require("../utils/detection");
+const { resolvePath, createFiles, writeSave } = require("../utils/files");
 
 async function installCommand() {
   // Zobrazení názvu
@@ -28,58 +31,45 @@ async function installCommand() {
   }
 
   // Kontrola závislostí
-  const mismatch = await detectMatch(config);
+  await detectOrFix();
 
-  // Pokud se něco neshoduje zobrazí se chyba a nabídne se opětovná inicializace
-  if (mismatch.length > 0) {
-    mismatch.forEach((error) => {
-      print.error(error);
+  // Pokud se něco neshoduje zobrazí vrátí se chyba
+  const missing = detectExistence(config);
+
+  // Vytvoření souborů a složek
+  if (missing.length > 0) {
+    missing.forEach((file) => {
+      try {
+        createFiles(file);
+        print.info(`Created: ${file}`);
+      } catch (error) {
+        print.error(`Creating file: ${file}\n${error.message}`);
+        process.exit(1);
+      }
     });
-
-    const initAgain = await inquirer.prompt([
-      {
-        type: "confirm",
-        name: "initAgain",
-        message: "Would you like to initialize again?",
-        default: true,
-      },
-    ]);
-
-    if (initAgain.initAgain) {
-      require("./init")();
-    } else {
-      print.error("Installation aborted!");
-      process.exit(1);
-    }
-  } else {
-    const missing = detectExistence(config);
-
-    // Vytvoření souborů a složek
-    if (missing.length > 0) {
-      missing.forEach((file) => {
-        try {
-          createFiles(file);
-          print.info(`Created: ${file}`);
-        } catch (error) {
-          print.error(`Creating file: ${file}\n${error.message}`);
-          process.exit(1);
-        }
-      });
-    }
-
-    // Uprava konfigurace v cílovém projektu
-    // - uprava tailwind.config.js
-    // - uprava vite.config.js(ts) / nuxt.config.js(ts)
-    // - uprava tsconfig.json / jsconfig.json
-    // - uprava global css
-    // - import global css to main file
-
-    print.success("Installation completed successfully!");
-    print.command(
-      "rosalana-dev add <component>",
-      "add component to your project"
-    );
   }
+
+  const rootTSFolder = config.paths.types.substring(
+    0,
+    config.paths.types.lastIndexOf("/")
+  );
+
+  const moduleTSFile = path.join(config.paths.types, "index.ts");
+
+  const indexTSPath = path.join(rootTSFolder, "index.ts");
+  const indexTSContent = `export * from "./rs";\n`;
+  const moduleTSContent = `export {};\n`;
+  
+  // Vytvoření obsahu pro index.ts
+  writeSave(indexTSPath, indexTSContent);
+  writeSave(moduleTSFile, moduleTSContent);
+
+
+  print.success("Installation completed successfully!");
+  print.command(
+    "rosalana-dev add <component>",
+    "add component to your project"
+  );
 }
 
 module.exports = installCommand;
