@@ -1,5 +1,5 @@
 import { h } from 'vue';
-import { ContentReducerOptions, ContentReducerReturn } from '@/types';
+import type { ContentReducerOptions, ContentReducerReturn } from '@/types';
 /**
  * Reduce content rendering to limit
  * @param content any[]

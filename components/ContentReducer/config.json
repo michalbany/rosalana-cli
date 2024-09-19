@@ -1,11 +1,11 @@
 {
     "files": [
       {
-        "name": "useContentReduser.ts",
+        "name": "useContentReducer.ts",
         "path": "composables"
       },
       {
-        "name": "ContentReduser.d.ts",
+        "name": "ContentReducer.d.ts",
         "path": "types"
       }
     ],
