@@ -32,8 +32,8 @@ async function initCommand() {
       message: "Where do you want to place composables?",
       default: (dependencies) => {
         return dependencies.framework === "Nuxt"
-          ? "./composables/Rs"
-          : "./src/composables/Rs";
+          ? "./composables/rs"
+          : "./src/composables/rs";
       },
     },
     {
