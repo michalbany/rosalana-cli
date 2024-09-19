@@ -22,7 +22,7 @@ program
 
 program
   .command("install")
-  .description("Install components")
+  .description("Install necessary files")
   .action(installCommand);
 
 program
