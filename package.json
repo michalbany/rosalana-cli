@@ -12,7 +12,8 @@
     "chalk": "^4.1.2",
     "commander": "^12.1.0",
     "figlet": "^1.7.0",
-    "inquirer": "^8.2.6"
+    "inquirer": "^8.2.6",
+    "open": "^10.1.0"
   },
   "keywords": [
     "vue",
