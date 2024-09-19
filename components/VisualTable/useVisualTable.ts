@@ -1,5 +1,5 @@
 import { ref, computed, defineComponent, h, Ref } from 'vue';
-import { type VTColumnProcessed, type VTConfig, type VTRowStyle } from "../../types";
+import { type VTColumnProcessed, type VTConfig, type VTRowStyle } from "@/types";
 
 export function useVisualTable(config: VTConfig) {
   // Inicializace dat

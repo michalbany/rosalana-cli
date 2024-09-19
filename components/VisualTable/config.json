@@ -10,5 +10,6 @@
     }
   ],
   "type": "composables",
-  "name": "VisualTable"
+  "name": "VisualTable",
+  "warnings": []
 }

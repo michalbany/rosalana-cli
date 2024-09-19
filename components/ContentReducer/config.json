@@ -1,15 +1,15 @@
 {
-    "files": [
-      {
-        "name": "useContentReducer.ts",
-        "path": "composables"
-      },
-      {
-        "name": "ContentReducer.d.ts",
-        "path": "types"
-      }
-    ],
-    "type": "composables",
-    "name": "ContentReducer"
-  }
-  
+  "files": [
+    {
+      "name": "useContentReducer.ts",
+      "path": "composables"
+    },
+    {
+      "name": "ContentReducer.d.ts",
+      "path": "types"
+    }
+  ],
+  "type": "composables",
+  "name": "ContentReducer",
+  "warnings": []
+}

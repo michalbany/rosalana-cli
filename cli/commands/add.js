@@ -104,7 +104,7 @@ async function addCommand(name) {
 
     print.success(`Component ${name} added successfully. Feel free to modify it for your needs.`);
 
-    if (configComponent.warning && configComponent.warnings.length > 0) {
+    if (configComponent.warnings.length > 0) {
         configComponent.warnings.forEach(warning => {
             print.warning(warning);
         });
