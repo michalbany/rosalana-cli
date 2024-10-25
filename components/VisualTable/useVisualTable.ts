@@ -329,10 +329,10 @@ export function useVisualTable(config: VTConfig) {
     },
     paginator: {
       get first() {
-        return currentPage.value === 1;
+        return currentPage.value === 1 || this.totalPages === 0;
       },
       get last() {
-        return currentPage.value === this.totalPages;
+        return currentPage.value === this.totalPages || this.totalPages === 0;
       },
       get totalPages() {
         return Math.ceil(filteredData.value.length / pageSize.value);
