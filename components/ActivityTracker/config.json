@@ -5,7 +5,7 @@
         "path": "composables"
       },
       {
-        "name": "Activity.d.ts",
+        "name": "ActivityTracker.d.ts",
         "path": "types"
       }
     ],
