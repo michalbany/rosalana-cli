@@ -1,0 +1,12 @@
+{
+    "files": [
+      {
+        "name": "useDownloadText.ts",
+        "path": "composables"
+      }
+    ],
+    "type": "composables",
+    "name": "DownloadText",
+    "warnings": []
+  }
+  
