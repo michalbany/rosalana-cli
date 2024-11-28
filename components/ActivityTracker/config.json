@@ -1,0 +1,16 @@
+{
+    "files": [
+      {
+        "name": "useActivity.ts",
+        "path": "composables"
+      },
+      {
+        "name": "Activity.d.ts",
+        "path": "types"
+      }
+    ],
+    "type": "composables",
+    "name": "ActivityTracker",
+    "warnings": []
+  }
+  
