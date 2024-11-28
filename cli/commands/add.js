@@ -77,7 +77,7 @@ async function addCommand(name) {
         }
     }
 
-    config['rosalana-dev'] = "1.0.10"
+    config['rosalana-dev'] = "1.0.11"
 
     // aktualizace konfigurace rosalana.config.json
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
