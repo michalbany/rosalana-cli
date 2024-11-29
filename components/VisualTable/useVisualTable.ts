@@ -3,7 +3,7 @@ import { type VTColumnProcessed, type VTConfig, type VTRowStyle } from "@/types"
 
 export function useVisualTable(config: VTConfig) {
   // Inicializace dat
-  const originalData = ref(config.data);
+  const _originalData = ref(config.data);
   const dataPrefix = config.options?.dataPrefix;
 
   // Funkce pro flatten objektu z hlubokého na plochý
@@ -28,15 +28,19 @@ export function useVisualTable(config: VTConfig) {
     return result;
   };
 
-  if (dataPrefix) {
-    const prefixedData = originalData.value.map((item) => item[dataPrefix]);
-    originalData.value = prefixedData;
-  }
+  const originalData = computed(() => {
+    let data = _originalData.value;
 
-  if (config.options?.flatData) {
-    const flattenData = originalData.value.map((item) => flattenObject(item));
-    originalData.value = flattenData;
-  }
+    if (config.options?.flatData) {
+      data = data.map((item) => flattenObject(item));
+    }
+
+    if (dataPrefix) {
+      data = data.map((item) => item[dataPrefix]);
+    }
+
+    return data;
+  });
 
   // Funkce pro získání hodnoty z objektu na základě cesty (např. "user.name")
   const getValueByPath = (obj: any, path: string) => {
