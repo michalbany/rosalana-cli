@@ -1,6 +1,6 @@
 {
   "name": "rosalana-dev",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "bin": {
     "rosalana-dev": "./cli/index.js"
   },

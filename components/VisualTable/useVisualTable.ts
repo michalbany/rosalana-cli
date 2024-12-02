@@ -30,6 +30,11 @@ export function useVisualTable(config: VTConfig) {
 
   const originalData = computed(() => {
     let data = _originalData.value;
+    
+    if (data == null) {
+      console.error("[VISUAL TABLE] Data is null or undefined. Be sure to mount table component after data is loaded.");
+      return [];
+    }
 
     if (config.options?.flatData) {
       data = data.map((item) => flattenObject(item));

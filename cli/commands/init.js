@@ -53,7 +53,7 @@ async function initCommand() {
 
   try {
     fs.writeFileSync(configPath, JSON.stringify({
-      "rosalana-dev": "1.0.12",
+      "rosalana-dev": "1.0.13",
       "paths": {
         ...answers
       },
